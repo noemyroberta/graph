@@ -55,8 +55,8 @@ class IncidenceMatrix:
         return edges
 
     def exist_parallel_edges(self):
-        for vertex_1 in range(self.vertices_size):
-            for vertex_2 in range(self.vertices_size):
-                if self.get_number_of_edges(vertex_1, vertex_2) > 1:
+        for start_vertex in range(self.vertices_size):
+            for end_vertex in range(self.vertices_size):
+                if self.get_number_of_edges(start_vertex, end_vertex) > 1:
                     return True
         return False

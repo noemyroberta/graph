@@ -20,25 +20,43 @@ class IncidenceMatrix:
 
         return graph
 
-    def add_edge_between(self, start_vertex, end_vertex, edge):
+    def add_edge(self, start_vertex, end_vertex, edge):
         self.matrix[start_vertex][edge] += 1
         self.matrix[end_vertex][edge] += 1
+        print('Add edge')
         print(self.__str__())
 
-    def remove_edge_between(self, start_vertex, end_vertex, edge):
+    def remove_edge(self, start_vertex, end_vertex, edge):
         if self.matrix[start_vertex][edge]:
             self.matrix[start_vertex][edge] -= 1
             self.matrix[end_vertex][edge] -= 1
+            print('Removing edge')
             print(self.__str__())
         else:
             print(f'Edge between vertices {start_vertex} and {end_vertex} does not exist')
 
-    def exist_edge_between(self, start_vertex, end_vertex, edge):
+    def exist_edge(self, start_vertex, end_vertex, edge):
         try:
-            if self.matrix[end_vertex][edge] == 0:
+            if self.matrix[end_vertex][edge] == 0 or self.matrix[start_vertex][edge] == 0:
                 print(f'Edge between {start_vertex} and {end_vertex} does not exist')
             else:
-                print('Yes')
+                print('Yes, exist an edge between')
 
         except IndexError:
             print('Edge or vertices does not exist')
+
+    def get_number_of_edges(self, start_vertex, end_vertex):
+        edges = 0
+
+        for edge in range(self.edges_size):
+            if self.matrix[start_vertex][edge] > 0 and self.matrix[end_vertex][edge] > 0:
+                edges += 1
+
+        return edges
+
+    def exist_parallel_edges(self):
+        for vertex_1 in range(self.vertices_size):
+            for vertex_2 in range(self.vertices_size):
+                if self.get_number_of_edges(vertex_1, vertex_2) > 1:
+                    return True
+        return False

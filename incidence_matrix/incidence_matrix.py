@@ -60,3 +60,18 @@ class IncidenceMatrix:
                 if self.get_number_of_edges(start_vertex, end_vertex) > 1:
                     return True
         return False
+
+    def get_matrix_max_degree(self):
+        current_degree = 0
+
+        for vertex in range(self.vertices_size):
+            degree = 0
+            for edge in range(self.edges_size):
+
+                if self.matrix[vertex][edge] > 0:
+                    degree += 1
+
+                if degree > current_degree:
+                    current_degree = degree
+
+        return current_degree

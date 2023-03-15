@@ -54,13 +54,6 @@ class IncidenceMatrix:
 
         return edges
 
-    def exist_parallel_edges(self):
-        for start_vertex in range(self.vertices_size):
-            for end_vertex in range(self.vertices_size):
-                if self.get_number_of_edges(start_vertex, end_vertex) > 1:
-                    return True
-        return False
-
     def get_matrix_max_degree(self):
         current_degree = 0
 
@@ -75,3 +68,8 @@ class IncidenceMatrix:
                     current_degree = degree
 
         return current_degree
+
+    def has_loop(self):
+        for start_vertex in range(self.vertices_size):
+            for end_vertex in range(self.vertices_size):
+                return self.get_number_of_edges(start_vertex, end_vertex) > 1
